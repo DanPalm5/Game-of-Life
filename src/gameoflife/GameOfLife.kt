@@ -1,0 +1,4 @@
+package gameoflife
+
+class GameOfLife {
+}
