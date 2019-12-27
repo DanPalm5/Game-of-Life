@@ -13,7 +13,6 @@ class Game(gridSize: Pair<Int, Int>, val initStates: Array<Array<EntityState>> =
         }
     }
 
-
     fun run()
     {
 
@@ -22,6 +21,10 @@ class Game(gridSize: Pair<Int, Int>, val initStates: Array<Array<EntityState>> =
 }
 
 /* Rules
+
+cares about cells that are horizontally, vertically, or diagonally
+adjacent
+
 Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 Any live cell with two or three live neighbours lives on to the next generation.
 Any live cell with more than three live neighbours dies, as if by overpopulation.
