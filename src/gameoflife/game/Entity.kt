@@ -14,26 +14,31 @@ enum class EntityState(private val state: Int)
     abstract override fun toString(): String
 }
 
-class Entity(val initState: EntityState = EntityState.DEAD, val position: Pair<Int, Int>)
+/**
+ * Entity populating a cell of the game board
+ * Position is (row,column)
+ */
+class Entity(private val initState: EntityState = EntityState.DEAD, val position: Pair<Int, Int>)
 {
 
 
-    // row, col
+    /**
+     * Game board positions for entity siblings
+     */
 
-    val topRightSib: Pair<Int, Int> = Pair(position.first-1, position.second+1)
+    val northSib: Pair<Int,Int> = Pair(position.first-1, position.second)
 
-    val topSib: Pair<Int,Int> = Pair(position.first-1, position.second)
+    val northEastSib: Pair<Int, Int> = Pair(position.first-1, position.second+1)
 
-    val topLeftSib: Pair<Int, Int> = Pair(position.first-1, position.second-1)
+    val eastSib: Pair<Int,Int> = Pair(position.first, position.second+1)
 
-    val rightSib: Pair<Int,Int> = Pair(position.first, position.second+1)
+    val southEastSib: Pair<Int,Int> = Pair(position.first+1, position.second+1)
 
-    val leftSib: Pair<Int,Int> = Pair(position.first, position.second-1)
+    val southSib: Pair<Int, Int> = Pair(position.first+1, position.second)
 
-    val lowerRightSib: Pair<Int,Int> = Pair(position.first+1, position.second+1)
+    val southWestSib: Pair<Int, Int> = Pair(position.first+1, position.second-1)
 
-    val lowerLeftSib: Pair<Int, Int> = Pair(position.first+1, position.second-1)
+    val westSib: Pair<Int,Int> = Pair(position.first, position.second-1)
 
-
-
+    val northWestSib: Pair<Int, Int> = Pair(position.first-1, position.second-1)
 }

@@ -1,19 +1,28 @@
 package gameoflife.game
 
-import gameoflife.ui.Window
-                                    // Initial states for each entity (dead or alive)
-class Game(gridSize: Pair<Int, Int>, private val initStates: Array<Array<EntityState>> = Array(gridSize.first) { Array(gridSize.second) { EntityState.DEAD } })
+/**
+ * Instance of the game
+ * Game board is in row-major form (row, column)
+ */
+class Game(
+    boardSize: Pair<Int, Int>,
+
+    // Initial states for each entity (dead or alive)
+    private val initStates: Array<Array<EntityState>> = Array(boardSize.first) { Array(boardSize.second) { EntityState.DEAD } })
 {
     // initialize window and 2D array for game board
-    val gameBoard: Array<Array<Entity>> = Array(gridSize.first)
+    val gameBoard: Array<Array<Entity>> = Array(boardSize.first)
     { row ->
-        Array(gridSize.second)
+        Array(boardSize.second)
         { cell ->
             Entity(initStates[row][cell], Pair(row, cell))
         }
     }
 
-    fun run()
+    /**
+     * Update entity states based on their siblings
+     */
+    fun update()
     {
 
     }
