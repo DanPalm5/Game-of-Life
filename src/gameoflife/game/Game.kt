@@ -4,9 +4,8 @@ import gameoflife.ui.Window
 
 class Game(gridSize: Pair<Int, Int>)
 {
-    // initialize window and 2D array for game board
+    // initialize 2D array for game board
     val gameBoard: Array<IntArray> = Array(gridSize.first) {IntArray(gridSize.second) {0} }
-
 
     fun run()
     {
@@ -16,6 +15,10 @@ class Game(gridSize: Pair<Int, Int>)
 }
 
 /* Rules
+
+cares about cells that are horizontally, vertically, or diagonally
+adjacent
+
 Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 Any live cell with two or three live neighbours lives on to the next generation.
 Any live cell with more than three live neighbours dies, as if by overpopulation.
