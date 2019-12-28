@@ -5,7 +5,7 @@ package gameoflife.game
  * Game board is in row-major form (row, column)
  */
 class Game(
-    boardSize: Pair<Int, Int>,
+    val boardSize: Pair<Int, Int>,
 
     // Initial states for each entity (dead or alive)
     private val initStates: Array<Array<EntityState>> = Array(boardSize.first) { Array(boardSize.second) { EntityState.DEAD } })
