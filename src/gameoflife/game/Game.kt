@@ -30,28 +30,28 @@ class Game(
         for(row in gameBoard){
 
             for(cell in row){
-                // north sib
+                // north sib -> The top row will not have a north sib
                 if (gameBoard[cell.northSib.first][cell.northSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.northSib.first][cell.northSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // north east sib
+                // north east sib -> top row, and rightmost column will not have a north sib
                 if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // north west sib
+                // north west sib -> top row, and leftmost column will not have a north west sib
                 if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // east sib
+                // east sib -> the rightmost column will not have a east sib
                 if (gameBoard[cell.eastSib.first][cell.eastSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.eastSib.first][cell.eastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // west sib
+                // west sib -> the leftmost column will not have a east sib
                 if (gameBoard[cell.westSib.first][cell.westSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.westSib.first][cell.westSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // south sib
+                // south sib -> bottom row will not have a south sib
                 if (gameBoard[cell.southSib.first][cell.southSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.southSib.first][cell.southSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // south east sib
+                // south east sib -> bottom row and rightmost column wil not have a south east sib
                 if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // south west sib
+                // south west sib -> bottom row and leftmost column wil not have a south east sib
                 if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.DEAD) {deadSibs+=1}
                     else if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
 
