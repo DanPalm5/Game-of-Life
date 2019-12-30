@@ -21,7 +21,7 @@ enum class EntityState(private val state: Int)
 class Entity(private val initState: EntityState = EntityState.DEAD, val position: Pair<Int, Int>)
 {
 
-
+    var state: EntityState = initState
     /**
      * Game board positions for entity siblings
      */

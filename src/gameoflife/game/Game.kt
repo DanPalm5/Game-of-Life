@@ -24,8 +24,15 @@ class Game(
      */
     fun update()
     {
+        var aliveSibs = 0
+        var deadSibs =  0
+        
+
+
 
     }
+
+
 
 }
 
