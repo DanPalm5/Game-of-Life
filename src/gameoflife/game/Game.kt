@@ -26,13 +26,54 @@ class Game(
     {
         var aliveSibs = 0
         var deadSibs =  0
-        
+        for(row in gameBoard){
 
+            for(cell in row){
+                // north sib
+                if (gameBoard[cell.northSib.first][cell.northSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.northSib.first][cell.northSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // north east sib
+                if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // north west sib
+                if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // east sib
+                if (gameBoard[cell.eastSib.first][cell.eastSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.eastSib.first][cell.eastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // west sib
+                if (gameBoard[cell.westSib.first][cell.westSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.westSib.first][cell.westSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // south sib
+                if (gameBoard[cell.southSib.first][cell.southSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.southSib.first][cell.southSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // south east sib
+                if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // south west sib
+                if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.DEAD) {deadSibs+=1}
+                    else if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+
+                //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+                if(deadSibs == 3 && gameBoard[cell.position.first][cell.position.second].state == EntityState.DEAD) {
+                    gameBoard[cell.position.first][cell.position.second].state = EntityState.ALIVE
+                // Any live cell with two or three neighbors survives.
+                }else if ((aliveSibs == 2 || aliveSibs == 3) && gameBoard[cell.position.first][cell.position.second].state == EntityState.ALIVE){
+                    gameBoard[cell.position.first][cell.position.second].state = EntityState.ALIVE
+                // All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+                }else{
+                    gameBoard[cell.position.first][cell.position.second].state = EntityState.DEAD
+                }
+
+
+
+                aliveSibs = 0
+                deadSibs = 0
+            }
+        }
 
 
     }
-
-
 
 }
 
