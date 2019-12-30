@@ -1,5 +1,7 @@
 package gameoflife.game
 
+import gameoflife.util.Position
+
 enum class EntityState(private val state: Int)
 {
     DEAD(0)
@@ -18,7 +20,7 @@ enum class EntityState(private val state: Int)
  * Entity populating a cell of the game board
  * Position is (row,column)
  */
-class Entity(private val initState: EntityState = EntityState.DEAD, val position: Pair<Int, Int>)
+class Entity(initState: EntityState = EntityState.DEAD, val position: Position<Int>)
 {
 
     var state: EntityState = initState
@@ -26,19 +28,19 @@ class Entity(private val initState: EntityState = EntityState.DEAD, val position
      * Game board positions for entity siblings
      */
 
-    val northSib: Pair<Int,Int> = Pair(position.first-1, position.second)
+    val northSib: Pair<Int,Int> = Pair(position.x-1, position.y)
 
-    val northEastSib: Pair<Int, Int> = Pair(position.first-1, position.second+1)
+    val northEastSib: Pair<Int, Int> = Pair(position.x-1, position.y+1)
 
-    val eastSib: Pair<Int,Int> = Pair(position.first, position.second+1)
+    val eastSib: Pair<Int,Int> = Pair(position.x, position.y+1)
 
-    val southEastSib: Pair<Int,Int> = Pair(position.first+1, position.second+1)
+    val southEastSib: Pair<Int,Int> = Pair(position.x+1, position.y+1)
 
-    val southSib: Pair<Int, Int> = Pair(position.first+1, position.second)
+    val southSib: Pair<Int, Int> = Pair(position.x+1, position.y)
 
-    val southWestSib: Pair<Int, Int> = Pair(position.first+1, position.second-1)
+    val southWestSib: Pair<Int, Int> = Pair(position.x+1, position.y-1)
 
-    val westSib: Pair<Int,Int> = Pair(position.first, position.second-1)
+    val westSib: Pair<Int,Int> = Pair(position.x, position.y-1)
 
-    val northWestSib: Pair<Int, Int> = Pair(position.first-1, position.second-1)
+    val northWestSib: Pair<Int, Int> = Pair(position.x-1, position.y-1)
 }

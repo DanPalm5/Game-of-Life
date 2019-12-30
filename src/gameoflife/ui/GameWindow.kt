@@ -1,6 +1,7 @@
 package gameoflife.ui
 
 import gameoflife.game.Game
+import gameoflife.util.Size
 import java.awt.Dimension
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
@@ -11,10 +12,10 @@ import kotlin.system.exitProcess
 /**
  * Window for handling a game instance
  */
-class GameWindow(windowSize: Pair<Int, Int>, val gameInstance: Game) : JFrame()
+class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
 {
 
-    private val panel: JPanel = JPanel()
+    private val panel: GameRenderPanel = GameRenderPanel(this)
 
     companion object
     {
@@ -26,7 +27,7 @@ class GameWindow(windowSize: Pair<Int, Int>, val gameInstance: Game) : JFrame()
     {
         ++instances
 
-        setTitle("Game of Life")
+        title = "Game of Life"
         defaultCloseOperation = JFrame.EXIT_ON_CLOSE
 
         // On window close, exit the entire program if the current window
@@ -43,7 +44,7 @@ class GameWindow(windowSize: Pair<Int, Int>, val gameInstance: Game) : JFrame()
             }
         })
 
-        panel.preferredSize = Dimension(windowSize.first, windowSize.second)
+        panel.preferredSize = Dimension(windowSize.width, windowSize.height)
         add(panel)
 
         pack()

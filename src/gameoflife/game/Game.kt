@@ -1,21 +1,22 @@
 package gameoflife.game
+import gameoflife.util.*
 
 /**
  * Instance of the game
  * Game board is in row-major form (row, column)
  */
 class Game(
-    val boardSize: Pair<Int, Int>,
+    val boardSize: Size<Int>,
 
     // Initial states for each entity (dead or alive)
-    private val initStates: Array<Array<EntityState>> = Array(boardSize.first) { Array(boardSize.second) { EntityState.DEAD } })
+    initStates: Array<Array<EntityState>> = Array(boardSize.width) { Array(boardSize.height) { EntityState.DEAD } })
 {
     // initialize window and 2D array for game board
-    val gameBoard: Array<Array<Entity>> = Array(boardSize.first)
+    val gameBoard: Array<Array<Entity>> = Array(boardSize.width)
     { row ->
-        Array(boardSize.second)
+        Array(boardSize.height)
         { cell ->
-            Entity(initStates[row][cell], Pair(row, cell))
+            Entity(initStates[row][cell], Position(row, cell))
         }
     }
 
@@ -55,14 +56,14 @@ class Game(
                     else if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
 
                 //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-                if(deadSibs == 3 && gameBoard[cell.position.first][cell.position.second].state == EntityState.DEAD) {
-                    gameBoard[cell.position.first][cell.position.second].state = EntityState.ALIVE
+                if(deadSibs == 3 && gameBoard[cell.position.x][cell.position.y].state == EntityState.DEAD) {
+                    gameBoard[cell.position.x][cell.position.y].state = EntityState.ALIVE
                 // Any live cell with two or three neighbors survives.
-                }else if ((aliveSibs == 2 || aliveSibs == 3) && gameBoard[cell.position.first][cell.position.second].state == EntityState.ALIVE){
-                    gameBoard[cell.position.first][cell.position.second].state = EntityState.ALIVE
+                }else if ((aliveSibs == 2 || aliveSibs == 3) && gameBoard[cell.position.x][cell.position.y].state == EntityState.ALIVE){
+                    gameBoard[cell.position.x][cell.position.y].state = EntityState.ALIVE
                 // All other live cells die in the next generation. Similarly, all other dead cells stay dead.
                 }else{
-                    gameBoard[cell.position.first][cell.position.second].state = EntityState.DEAD
+                    gameBoard[cell.position.x][cell.position.y].state = EntityState.DEAD
                 }
 
 
