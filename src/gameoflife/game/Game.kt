@@ -31,40 +31,40 @@ class Game(
         for(row in gameBoard){
 
             for(cell in row){
-                // north sib
-                if (gameBoard[cell.northSib.first][cell.northSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.northSib.first][cell.northSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // north east sib
-                if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // north west sib
-                if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // east sib
-                if (gameBoard[cell.eastSib.first][cell.eastSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.eastSib.first][cell.eastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // west sib
-                if (gameBoard[cell.westSib.first][cell.westSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.westSib.first][cell.westSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // south sib
-                if (gameBoard[cell.southSib.first][cell.southSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.southSib.first][cell.southSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // south east sib
-                if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
-                // south west sib
-                if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.DEAD) {deadSibs+=1}
-                    else if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].state == EntityState.ALIVE) {aliveSibs+=1}
+                // north sib -> The top row will not have a north sib
+                if (gameBoard[cell.northSib.first][cell.northSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.northSib.first][cell.northSib.second].isAlive()) {aliveSibs+=1}
+                // north east sib -> top row, and rightmost column will not have a north sib
+                if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].isAlive()) {aliveSibs+=1}
+                // north west sib -> top row, and leftmost column will not have a north west sib
+                if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].isAlive()) {aliveSibs+=1}
+                // east sib -> the rightmost column will not have a east sib
+                if (gameBoard[cell.eastSib.first][cell.eastSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.eastSib.first][cell.eastSib.second].isAlive()) {aliveSibs+=1}
+                // west sib -> the leftmost column will not have a east sib
+                if (gameBoard[cell.westSib.first][cell.westSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.westSib.first][cell.westSib.second].isAlive()) {aliveSibs+=1}
+                // south sib -> bottom row will not have a south sib
+                if (gameBoard[cell.southSib.first][cell.southSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.southSib.first][cell.southSib.second].isAlive()) {aliveSibs+=1}
+                // south east sib -> bottom row and rightmost column wil not have a south east sib
+                if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].isAlive()) {aliveSibs+=1}
+                // south west sib -> bottom row and leftmost column wil not have a south east sib
+                if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].isDead()) {deadSibs+=1}
+                else if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].isAlive()) {aliveSibs+=1}
 
-                //Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-                if(deadSibs == 3 && gameBoard[cell.position.x][cell.position.y].state == EntityState.DEAD) {
-                    gameBoard[cell.position.x][cell.position.y].state = EntityState.ALIVE
-                // Any live cell with two or three neighbors survives.
-                }else if ((aliveSibs == 2 || aliveSibs == 3) && gameBoard[cell.position.x][cell.position.y].state == EntityState.ALIVE){
-                    gameBoard[cell.position.x][cell.position.y].state = EntityState.ALIVE
-                // All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+                // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+                if(deadSibs == 3 && gameBoard[cell.position.x][cell.position.y].isDead()) {
+                    gameBoard[cell.position.x][cell.position.y].resurrect()
+                    // Any live cell with two or three neighbors survives.
+                }else if ((aliveSibs == 2 || aliveSibs == 3) && gameBoard[cell.position.x][cell.position.y].isAlive()){
+                    gameBoard[cell.position.x][cell.position.y].resurrect()
+                    // All other live cells die in the next generation. Similarly, all other dead cells stay dead.
                 }else{
-                    gameBoard[cell.position.x][cell.position.y].state = EntityState.DEAD
+                    gameBoard[cell.position.x][cell.position.y].kill()
                 }
 
 
