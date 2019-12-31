@@ -3,6 +3,8 @@ package gameoflife.ui
 import gameoflife.game.Game
 import gameoflife.util.Size
 import java.awt.Dimension
+import java.awt.event.KeyAdapter
+import java.awt.event.KeyEvent
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import javax.swing.JFrame

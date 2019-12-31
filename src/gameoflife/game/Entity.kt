@@ -23,7 +23,13 @@ enum class EntityState(private val state: Int)
 class Entity(initState: EntityState = EntityState.DEAD, val position: Position<Int>)
 {
 
-    var state: EntityState = initState
+    private var state: EntityState = initState
+    fun isAlive()   = state == EntityState.ALIVE
+    fun isDead()    = state == EntityState.DEAD
+    fun kill()      { state = EntityState.DEAD }
+    fun resurrect() { state = EntityState.ALIVE }
+    fun toggleState() { state = if(isAlive()) EntityState.DEAD else EntityState.ALIVE }
+
     /**
      * Game board positions for entity siblings
      */
@@ -43,4 +49,6 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: Position<I
     val westSib: Pair<Int,Int> = Pair(position.x, position.y-1)
 
     val northWestSib: Pair<Int, Int> = Pair(position.x-1, position.y-1)
+
+    override fun toString(): String = "Entity(state = $state, pos = $position)"
 }
