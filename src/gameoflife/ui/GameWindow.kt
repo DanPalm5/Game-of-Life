@@ -3,12 +3,10 @@ package gameoflife.ui
 import gameoflife.game.Game
 import gameoflife.util.Size
 import java.awt.Dimension
-import java.awt.event.KeyAdapter
-import java.awt.event.KeyEvent
-import java.awt.event.WindowAdapter
-import java.awt.event.WindowEvent
+import java.awt.event.*
 import javax.swing.JFrame
 import javax.swing.JPanel
+import javax.swing.Timer
 import kotlin.system.exitProcess
 
 /**
@@ -18,6 +16,11 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
 {
 
     private val panel: GameRenderPanel = GameRenderPanel(this)
+    private val gameTicker: Timer = Timer(1000, ActionListener
+    {
+        gameInstance.update()
+        panel.repaint()
+    })
 
     companion object
     {
@@ -51,6 +54,9 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
 
         pack()
         setLocationRelativeTo(null)
+
+        /// This needs to be attached to a start/stop button. Its here for debugging for now
+        gameTicker.start()
     }
 
 }

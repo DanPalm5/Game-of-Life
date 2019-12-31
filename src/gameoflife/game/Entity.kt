@@ -34,21 +34,21 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: Position<I
      * Game board positions for entity siblings
      */
 
-    val northSib: Pair<Int,Int> = Pair(position.x-1, position.y)
+    val northSib: Position<Int> = Position(position.x-1, position.y)
 
-    val northEastSib: Pair<Int, Int> = Pair(position.x-1, position.y+1)
+    val northEastSib: Position<Int> = Position(position.x-1, position.y+1)
 
-    val eastSib: Pair<Int,Int> = Pair(position.x, position.y+1)
+    val eastSib: Position<Int> = Position(position.x, position.y+1)
 
-    val southEastSib: Pair<Int,Int> = Pair(position.x+1, position.y+1)
+    val southEastSib: Position<Int> = Position(position.x+1, position.y+1)
 
-    val southSib: Pair<Int, Int> = Pair(position.x+1, position.y)
+    val southSib: Position<Int> = Position(position.x+1, position.y)
 
-    val southWestSib: Pair<Int, Int> = Pair(position.x+1, position.y-1)
+    val southWestSib: Position<Int> = Position(position.x+1, position.y-1)
 
-    val westSib: Pair<Int,Int> = Pair(position.x, position.y-1)
+    val westSib: Position<Int> = Position(position.x, position.y-1)
 
-    val northWestSib: Pair<Int, Int> = Pair(position.x-1, position.y-1)
+    val northWestSib: Position<Int> = Position(position.x-1, position.y-1)
 
     override fun toString(): String = "Entity(state = $state, pos = $position)"
 }

@@ -32,29 +32,29 @@ class Game(
 
             for(cell in row){
                 // north sib -> The top row will not have a north sib
-                if (gameBoard[cell.northSib.first][cell.northSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.northSib.first][cell.northSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.northSib.x][cell.northSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.northSib.x][cell.northSib.y].isAlive()) {aliveSibs+=1}
                 // north east sib -> top row, and rightmost column will not have a north sib
-                if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.northEastSib.first][cell.northEastSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.northEastSib.x][cell.northEastSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.northEastSib.x][cell.northEastSib.y].isAlive()) {aliveSibs+=1}
                 // north west sib -> top row, and leftmost column will not have a north west sib
-                if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.northWestSib.first][cell.northWestSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.northWestSib.x][cell.northWestSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.northWestSib.x][cell.northWestSib.y].isAlive()) {aliveSibs+=1}
                 // east sib -> the rightmost column will not have a east sib
-                if (gameBoard[cell.eastSib.first][cell.eastSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.eastSib.first][cell.eastSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.eastSib.x][cell.eastSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.eastSib.x][cell.eastSib.y].isAlive()) {aliveSibs+=1}
                 // west sib -> the leftmost column will not have a east sib
-                if (gameBoard[cell.westSib.first][cell.westSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.westSib.first][cell.westSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.westSib.x][cell.westSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.westSib.x][cell.westSib.y].isAlive()) {aliveSibs+=1}
                 // south sib -> bottom row will not have a south sib
-                if (gameBoard[cell.southSib.first][cell.southSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.southSib.first][cell.southSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.southSib.x][cell.southSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.southSib.x][cell.southSib.y].isAlive()) {aliveSibs+=1}
                 // south east sib -> bottom row and rightmost column wil not have a south east sib
-                if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.southEastSib.first][cell.southEastSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.southEastSib.x][cell.southEastSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.southEastSib.x][cell.southEastSib.y].isAlive()) {aliveSibs+=1}
                 // south west sib -> bottom row and leftmost column wil not have a south east sib
-                if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].isDead()) {deadSibs+=1}
-                else if (gameBoard[cell.southWestSib.first][cell.southWestSib.second].isAlive()) {aliveSibs+=1}
+                if (gameBoard[cell.southWestSib.x][cell.southWestSib.y].isDead()) {deadSibs+=1}
+                    else if (gameBoard[cell.southWestSib.x][cell.southWestSib.y].isAlive()) {aliveSibs+=1}
 
                 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
                 if(deadSibs == 3 && gameBoard[cell.position.x][cell.position.y].isDead()) {
