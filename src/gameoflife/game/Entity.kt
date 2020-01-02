@@ -1,6 +1,6 @@
 package gameoflife.game
 
-import gameoflife.util.Position
+import gameoflife.util.GridPos
 
 enum class EntityState(private val state: Int)
 {
@@ -18,9 +18,9 @@ enum class EntityState(private val state: Int)
 
 /**
  * Entity populating a cell of the game board
- * Position is (row,column)
+ * Position is (col, row)
  */
-class Entity(initState: EntityState = EntityState.DEAD, val position: Position<Int>)
+class Entity(initState: EntityState = EntityState.DEAD, val position: GridPos<Int>)
 {
 
     private var state: EntityState = initState
@@ -34,21 +34,21 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: Position<I
      * Game board positions for entity siblings
      */
 
-    val northSib: Position<Int> = Position(position.x-1, position.y)
+    val northSib: GridPos<Int> = GridPos(position.col, position.row-1)
 
-    val northEastSib: Position<Int> = Position(position.x-1, position.y+1)
+    val northEastSib: GridPos<Int> = GridPos(position.col+1, position.row-1)
 
-    val eastSib: Position<Int> = Position(position.x, position.y+1)
+    val eastSib: GridPos<Int> = GridPos(position.col+1, position.row)
 
-    val southEastSib: Position<Int> = Position(position.x+1, position.y+1)
+    val southEastSib: GridPos<Int> = GridPos(position.col+1, position.row+1)
 
-    val southSib: Position<Int> = Position(position.x+1, position.y)
+    val southSib: GridPos<Int> = GridPos(position.col, position.row+1)
 
-    val southWestSib: Position<Int> = Position(position.x+1, position.y-1)
+    val southWestSib: GridPos<Int> = GridPos(position.col-1, position.row+1)
 
-    val westSib: Position<Int> = Position(position.x, position.y-1)
+    val westSib: GridPos<Int> = GridPos(position.col-1, position.row)
 
-    val northWestSib: Position<Int> = Position(position.x-1, position.y-1)
+    val northWestSib: GridPos<Int> = GridPos(position.col-1, position.row-1)
 
     override fun toString(): String = "Entity(state = $state, pos = $position)"
 }
