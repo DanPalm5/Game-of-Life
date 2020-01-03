@@ -40,9 +40,9 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: GridPos<In
 
     val eastSib: GridPos<Int> by lazy { GridPos(position.col+1, position.row) }
 
-    val southEastSib: GridPos<Int> by lazy { GridPos(position.col+1, position.row+1) }
-
     val southSib: GridPos<Int> by lazy { GridPos(position.col, position.row+1) }
+
+    val southEastSib: GridPos<Int> by lazy { GridPos(position.col+1, position.row+1) }
 
     val southWestSib: GridPos<Int> by lazy { GridPos(position.col-1, position.row+1) }
 
@@ -50,10 +50,7 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: GridPos<In
 
     val northWestSib: GridPos<Int> by lazy { GridPos(position.col-1, position.row-1) }
 
-    fun getSib(array: Array<Array<Entity>>, pos: GridPos<Int>): Entity?
-    {
-        return array.getOrNull(pos.row)?.getOrNull(pos.col)
-    }
+    fun getSib(array: Array<Array<Entity>>, pos: GridPos<Int>): Entity? = array.getOrNull(pos.row)?.getOrNull(pos.col)
 
     override fun toString(): String = "Entity(state = $state, pos = $position)"
 }
