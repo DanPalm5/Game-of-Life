@@ -3,6 +3,7 @@ package gameoflife.main
 import gameoflife.game.EntityState
 import gameoflife.game.Game
 import gameoflife.ui.GameWindow
+import gameoflife.util.SaveData
 import gameoflife.util.Size
 
 const val INIT_GRID_SIZE = 20;
@@ -41,7 +42,7 @@ fun main(args: Array<String>)
     val window = GameWindow(WINDOW_SIZE, game)
     window.isVisible = true*/
 
-    val game = Game(convStates(STATE_TEST))
+    val game = Game(SaveData.readSaveFile("testsave.txt"))//Game(convStates(STATE_TEST))
     val window = GameWindow(WINDOW_SIZE, game)
     window.isVisible = true
 }
