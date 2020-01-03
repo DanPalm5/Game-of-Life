@@ -1,11 +1,7 @@
 package gameoflife.util
 
-import gameoflife.game.Entity
 import gameoflife.game.EntityState
-import gameoflife.game.Game
-import gameoflife.main.INIT_GRID_SIZE
 import java.io.File
-import java.nio.charset.Charset
 
 object SaveData
 {
@@ -18,7 +14,7 @@ object SaveData
         {
             for (cell in row)
             {
-                stringbuilder.append(cell.ordinal)
+                stringbuilder.append(cell.value)
             }
             stringbuilder.append('\n')
         }

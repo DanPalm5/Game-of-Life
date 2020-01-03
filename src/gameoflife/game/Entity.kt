@@ -2,7 +2,7 @@ package gameoflife.game
 
 import gameoflife.util.GridPos
 
-enum class EntityState(private val state: Int)
+enum class EntityState(val value: Int)
 {
     DEAD(0)
         {
