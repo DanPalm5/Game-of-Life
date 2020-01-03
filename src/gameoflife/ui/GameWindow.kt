@@ -20,7 +20,6 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
     {
         gameInstance.update()
         panel.repaint()
-        println("Update occured")
     })
 
     companion object
