@@ -7,11 +7,18 @@ import gameoflife.main.INIT_GRID_SIZE
 import java.io.File
 import java.nio.charset.Charset
 
-fun writeToFile(board: Array<Array<EntityState>>, filename: String){
+fun writeToFile(board: Array<Array<EntityState>>, filename: String) {
     // take current array, store in file (1/0)
     val fileToWrite = File(filename)
+    val stringbuilder = StringBuilder()
+    for (row in board) {
+        for (cell in row) {
+            stringbuilder.append(cell.ordinal)
+        }
+        stringbuilder.append('\n')
+    }
 
-
+    fileToWrite.writeText(stringbuilder.toString())
 }
 
 fun readSaveFile( filename: String) : Array<Array<EntityState>> { // read file, create array from contents
