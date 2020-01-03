@@ -12,8 +12,6 @@ fun writeToFile(board: Array<Array<EntityState>>, filename: String){
     val fileToWrite = File(filename)
 
 
-
-
 }
 
 fun readSaveFile( filename: String) : Array<Array<EntityState>> { // read file, create array from contents
