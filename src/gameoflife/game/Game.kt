@@ -69,7 +69,7 @@ class Game(
                 }else if (aliveSibs < 2 && entity.isAlive()) {
                     entity.kill()
                     //Any live cell with two or three live neighbours lives on to the next generation.
-                }else if (( aliveSibs == 2 || aliveSibs == 3 ) && entity.isAlive()) {
+                }else if ( (aliveSibs == 2 || aliveSibs == 3) && entity.isAlive() ) {
                     entity.resurrect()
                     //Any live cell with more than three live neighbours dies, as if by overpopulation.
                 }else if(aliveSibs > 3 && entity.isAlive()) {
