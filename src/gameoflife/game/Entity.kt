@@ -34,21 +34,21 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: GridPos<In
      * Game board positions for entity siblings
      */
 
-    val northSib: GridPos<Int> = GridPos(position.col, position.row-1)
+    val northSib: GridPos<Int> by lazy { GridPos(position.col, position.row-1) }
 
-    val northEastSib: GridPos<Int> = GridPos(position.col+1, position.row-1)
+    val northEastSib: GridPos<Int> by lazy { GridPos(position.col+1, position.row-1) }
 
-    val eastSib: GridPos<Int> = GridPos(position.col+1, position.row)
+    val eastSib: GridPos<Int> by lazy { GridPos(position.col+1, position.row) }
 
-    val southEastSib: GridPos<Int> = GridPos(position.col+1, position.row+1)
+    val southEastSib: GridPos<Int> by lazy { GridPos(position.col+1, position.row+1) }
 
-    val southSib: GridPos<Int> = GridPos(position.col, position.row+1)
+    val southSib: GridPos<Int> by lazy { GridPos(position.col, position.row+1) }
 
-    val southWestSib: GridPos<Int> = GridPos(position.col-1, position.row+1)
+    val southWestSib: GridPos<Int> by lazy { GridPos(position.col-1, position.row+1) }
 
-    val westSib: GridPos<Int> = GridPos(position.col-1, position.row)
+    val westSib: GridPos<Int> by lazy { GridPos(position.col-1, position.row) }
 
-    val northWestSib: GridPos<Int> = GridPos(position.col-1, position.row-1)
+    val northWestSib: GridPos<Int> by lazy { GridPos(position.col-1, position.row-1) }
 
     fun getSib(array: Array<Array<Entity>>, pos: GridPos<Int>): Entity?
     {
