@@ -50,5 +50,10 @@ class Entity(initState: EntityState = EntityState.DEAD, val position: GridPos<In
 
     val northWestSib: GridPos<Int> = GridPos(position.col-1, position.row-1)
 
+    fun getSib(array: Array<Array<Entity>>, pos: GridPos<Int>): Entity?
+    {
+        return array.getOrNull(pos.row)?.getOrNull(pos.col)
+    }
+
     override fun toString(): String = "Entity(state = $state, pos = $position)"
 }
