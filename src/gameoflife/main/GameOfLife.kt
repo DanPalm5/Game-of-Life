@@ -41,7 +41,7 @@ fun main(args: Array<String>)
     val window = GameWindow(WINDOW_SIZE, game)
     window.isVisible = true*/
 
-    val game = Game(Size(STATE_TEST[0].size, STATE_TEST.size), convStates(STATE_TEST))
+    val game = Game(convStates(STATE_TEST))
     val window = GameWindow(WINDOW_SIZE, game)
     window.isVisible = true
 }

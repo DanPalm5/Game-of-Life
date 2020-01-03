@@ -2,6 +2,7 @@ package gameoflife.ui
 
 import gameoflife.game.Entity
 import gameoflife.util.GridPos
+import gameoflife.util.Position
 import gameoflife.util.Size
 import java.awt.Color
 import java.awt.Graphics
@@ -56,19 +57,18 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
         val g2d = g as Graphics2D
 
         // Draw rectangle for entity
-        for(row in parentWindow.gameInstance.gameBoard.indices)
+
+        for((rowIndex, rowArr) in parentWindow.gameInstance.gameBoard.withIndex())
         {
-            for(col in parentWindow.gameInstance.gameBoard[row].indices)
+            for((colIndex, entity) in rowArr.withIndex())
             {
-                // Skip over entity if its dead
-                if(parentWindow.gameInstance.gameBoard[row][col].isDead())
+                if(entity.isDead())
                     g2d.color = Color.BLACK
                 else
                     g2d.color = Color.WHITE
 
-
-                val topLeft = GridPos(col * cellSize.width, row * cellSize.height)
-                val bottomRight = GridPos((col+1) * cellSize.width, (row+1) * cellSize.height)
+                val topLeft = Position(colIndex * cellSize.width, rowIndex * cellSize.height)
+                val bottomRight = Position((colIndex+1) * cellSize.width, (rowIndex+1) * cellSize.height)
 
                 g2d.fillRect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y)
             }
@@ -92,8 +92,8 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
     /**
      * Converts pixels
      */
-    private fun pixelsToGrid(pos: GridPos<Int>) : GridPos<Int> = GridPos(pos.x/cellSize.width, pos.y/cellSize.height)
-    private fun getEntity(gridPos: GridPos<Int>): Entity? = parentWindow.gameInstance.gameBoard.getOrNull(gridPos.y)?.getOrNull(gridPos.x)
+    private fun pixelsToGrid(pos: Position<Int>) : GridPos<Int> = GridPos(pos.x/cellSize.width, pos.y/cellSize.height)
+    private fun getEntity(gridPos: GridPos<Int>): Entity? = parentWindow.gameInstance.gameBoard.getOrNull(gridPos.row)?.getOrNull(gridPos.col)
 
     /**
      * Functions for toggling entity states with user input
@@ -103,7 +103,7 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
     {
         if(e != null)
         {
-            val pos = GridPos(e.x, e.y)
+            val pos = Position(e.x, e.y)
             val gridPos = pixelsToGrid(pos)
             lastSelection = getEntity(gridPos)
             lastSelection?.toggleState()
@@ -126,7 +126,7 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
     {
         if(e != null)
         {
-            val pos = GridPos(e.x, e.y)
+            val pos = Position(e.x, e.y)
             val gridPos = pixelsToGrid(pos)
             val currEntity = getEntity(gridPos)
 
