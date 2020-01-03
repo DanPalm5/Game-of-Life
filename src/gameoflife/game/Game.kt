@@ -32,35 +32,35 @@ class Game(
             for((columnIndex, entity) in rowArray.withIndex()){ // (cell index in row array, state of cell)
                 // north sib
                 if (entity.getSib(gameBoard, entity.northSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.northSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.northSib)?.isAlive() == true) aliveSibs+=1
 
                        // northwest sib
                 if (entity.getSib(gameBoard, entity.northWestSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.northWestSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.northWestSib)?.isAlive() == true) aliveSibs+=1
 
                        // northeast sib
                 if (entity.getSib(gameBoard, entity.northEastSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.northEastSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.northEastSib)?.isAlive() == true) aliveSibs+=1
 
                        // west sib
                 if (entity.getSib(gameBoard, entity.westSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.westSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.westSib)?.isAlive() == true) aliveSibs+=1
 
                        // east sib
                 if (entity.getSib(gameBoard, entity.eastSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.eastSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.eastSib)?.isAlive() == true) aliveSibs+=1
 
                        // south sib
                 if (entity.getSib(gameBoard, entity.southSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.southSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.southSib)?.isAlive() == true) aliveSibs+=1
 
                        // southwest sib
                 if (entity.getSib(gameBoard, entity.southWestSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.southWestSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.southWestSib)?.isAlive() == true) aliveSibs+=1
 
                        // southeast sib
                 if (entity.getSib(gameBoard, entity.southEastSib)?.isDead() == true) deadSibs += 1
-                if (entity.getSib(gameBoard, entity.southEastSib)?.isAlive() == true) aliveSibs+=1
+                else if (entity.getSib(gameBoard, entity.southEastSib)?.isAlive() == true) aliveSibs+=1
 
                 // Any dead cell with three live neighbors becomes a live cell.
                 if(aliveSibs == 3 && entity.isDead()) {

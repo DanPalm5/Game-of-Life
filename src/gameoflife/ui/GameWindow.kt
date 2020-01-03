@@ -16,7 +16,7 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
 {
 
     private val panel: GameRenderPanel = GameRenderPanel(this)
-    private val gameTicker: Timer = Timer(2000, ActionListener
+    private val gameTicker: Timer = Timer(500, ActionListener
     {
         gameInstance.update()
         panel.repaint()
