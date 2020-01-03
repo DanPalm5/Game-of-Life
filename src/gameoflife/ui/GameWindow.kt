@@ -16,10 +16,11 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
 {
 
     private val panel: GameRenderPanel = GameRenderPanel(this)
-    private val gameTicker: Timer = Timer(1000, ActionListener
+    private val gameTicker: Timer = Timer(2000, ActionListener
     {
         gameInstance.update()
         panel.repaint()
+        println("Update occured")
     })
 
     companion object
@@ -56,7 +57,7 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
         setLocationRelativeTo(null)
 
         /// This needs to be attached to a start/stop button. Its here for debugging for now
-        //gameTicker.start()
+        gameTicker.start()
     }
 
 }

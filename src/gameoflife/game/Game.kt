@@ -1,5 +1,4 @@
 package gameoflife.game
-import gameoflife.main.INIT_GRID_SIZE
 import gameoflife.util.*
 
 /**
