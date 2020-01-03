@@ -148,7 +148,6 @@ class Game(
             }
         }
 
-
     }
 
 }
@@ -170,4 +169,3 @@ All other live cells die in the next generation. Similarly, all other dead cells
 */
 
 
-// Logic here with updating 2d array
