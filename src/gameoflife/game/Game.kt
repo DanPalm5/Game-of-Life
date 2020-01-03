@@ -63,14 +63,22 @@ class Game(
                        entity.getSib(gameBoard, entity.southEastSib)?.isDead() ?: false -> deadSibs += 1
                        entity.getSib(gameBoard, entity.southEastSib)?.isAlive() ?: false -> aliveSibs+=1
                    }
-                // Any live cell with two or three neighbors survives.
-                if(deadSibs == 3 && entity.isDead()) {
+
+
+                // Any dead cell with three live neighbors becomes a live cell.
+                if(aliveSibs == 3 && entity.isDead()) {
                     entity.resurrect()
-                    // Any dead cell with three live neighbors becomes a live cell.
-                }else if ((aliveSibs == 2 || aliveSibs == 3) && entity.isAlive()){
+                    // Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+                }else if (aliveSibs < 2 && entity.isAlive()) {
+                    entity.kill()
+                    //Any live cell with two or three live neighbours lives on to the next generation.
+                }else if (( aliveSibs == 2 || aliveSibs == 3 ) && entity.isAlive()) {
                     entity.resurrect()
+                    //Any live cell with more than three live neighbours dies, as if by overpopulation.
+                }else if(aliveSibs > 3 && entity.isAlive()){
+                    entity.kill()
                     // All other live cells die in the next generation. Similarly, all other dead cells stay dead.
-                }else{
+                }else if (entity.isAlive()){
                     entity.kill()
                 }
 
