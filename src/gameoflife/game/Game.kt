@@ -18,6 +18,7 @@ class Game(
         Array(INIT_GRID_SIZE)
         { cell ->
             Entity(initStates[row][cell], GridPos(row, cell))
+
         }
     }
 
@@ -148,7 +149,6 @@ class Game(
             }
         }
 
-
     }
 
 }
@@ -170,4 +170,3 @@ All other live cells die in the next generation. Similarly, all other dead cells
 */
 
 
-// Logic here with updating 2d array
