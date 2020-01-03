@@ -29,34 +29,81 @@ class Game(
         var aliveSibs = 0
         var deadSibs =  0
         for((rowIndex,rowArray) in gameBoard.withIndex()){ //(row index, array of rows)
-            for((cellIndex,cellState) in rowArray.withIndex()){ // (cell index in row array, state of cell)
-                when (rowIndex != 0){ // top row does not have any north siblings
-                    //north sib
-                    gameBoard[rowArray[cellIndex].northSib.col][rowArray[cellIndex].northSib.row].isDead() -> deadSibs+=1
-                    gameBoard[rowArray[cellIndex].northSib.col][rowArray[cellIndex].northSib.row].isAlive() -> aliveSibs+=1
+            for((columnIndex, entity) in rowArray.withIndex()){ // (cell index in row array, state of cell)
+                   when {
+                        // north sib
+                       entity.getSib(gameBoard, entity.northSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.northSib)?.isAlive() ?: false -> aliveSibs+=1
 
+                       // northwest sib
+                       entity.getSib(gameBoard, entity.northWestSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.northWestSib)?.isAlive() ?: false -> aliveSibs+=1
+
+                       // northeast sib
+                       entity.getSib(gameBoard, entity.northEastSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.northEastSib)?.isAlive() ?: false -> aliveSibs+=1
+
+                       // west sib
+                       entity.getSib(gameBoard, entity.westSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.westSib)?.isAlive() ?: false -> aliveSibs+=1
+
+                       // east sib
+                       entity.getSib(gameBoard, entity.eastSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.eastSib)?.isAlive() ?: false -> aliveSibs+=1
+
+                       // south sib
+                       entity.getSib(gameBoard, entity.southSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.southSib)?.isAlive() ?: false -> aliveSibs+=1
+
+                       // southwest sib
+                       entity.getSib(gameBoard, entity.southWestSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.southWestSib)?.isAlive() ?: false -> aliveSibs+=1
+
+                       // southeast sib
+                       entity.getSib(gameBoard, entity.southEastSib)?.isDead() ?: false -> deadSibs += 1
+                       entity.getSib(gameBoard, entity.southEastSib)?.isAlive() ?: false -> aliveSibs+=1
+                   }
+                // Any live cell with two or three neighbors survives.
+                if(deadSibs == 3 && entity.isDead()) {
+                    entity.resurrect()
+                    // Any dead cell with three live neighbors becomes a live cell.
+                }else if ((aliveSibs == 2 || aliveSibs == 3) && entity.isAlive()){
+                    entity.resurrect()
+                    // All other live cells die in the next generation. Similarly, all other dead cells stay dead.
+                }else{
+                    entity.kill()
+                }
+
+                // reset sib count
+                aliveSibs = 0
+                deadSibs = 0
+
+                /*when (rowIndex != 0){ // top row does not have any north siblings
+                    //north sib
+                   gameBoard[entity.northSib.col][entity.northSib.row].isDead() -> deadSibs+=1
+                    gameBoard[entity.northSib.col][entity.northSib.row].isAlive() -> aliveSibs+=1
                     //north west sib -> first column doesn't have any northwest sibs,
-                    cellIndex!=0 &&
-                            gameBoard[rowArray[cellIndex].northWestSib.col][rowArray[cellIndex].northWestSib.row].isDead() -> deadSibs+=1
-                    cellIndex!=0 &&
-                            gameBoard[rowArray[cellIndex].northWestSib.col][rowArray[cellIndex].northWestSib.row].isAlive() -> aliveSibs+=1
+                    columnIndex!=0 &&
+                            gameBoard[entity.northWestSib.col][entity.northWestSib.row].isDead() -> deadSibs+=1
+                    columnIndex!=0 &&
+                            gameBoard[entity.northWestSib.col][entity.northWestSib.row].isAlive() -> aliveSibs+=1
 
                     // north east sib -> last column doesn't have any north east sibs.
-                    cellIndex!= rowArray.size &&
-                            gameBoard[rowArray[cellIndex].northEastSib.col][rowArray[cellIndex].northEastSib.row].isDead() -> deadSibs+=1
-                    cellIndex!= rowArray.size &&
-                            gameBoard[rowArray[cellIndex].northEastSib.col][rowArray[cellIndex].northEastSib.row].isAlive() -> aliveSibs+=1
+                    columnIndex!= rowArray.size &&
+                            gameBoard[entity.northEastSib.col][entity.northEastSib.row].isDead() -> deadSibs+=1
+                    columnIndex!= rowArray.size &&
+                            gameBoard[entity.northEastSib.col][entity.northEastSib.row].isAlive() -> aliveSibs+=1
                 }
 
                 when(rowIndex == rowArray.size){ // bottom row will not have any south siblings
                     // south sib
-                    gameBoard[rowArray[cellIndex].southSib.col][rowArray[cellIndex].southSib.row].isDead() -> deadSibs+=1
-                    gameBoard[rowArray[cellIndex].southSib.col][rowArray[cellIndex].southSib.row].isAlive() -> aliveSibs+=1
+                    gameBoard[entity.southSib.col][entity.northEastSib.row].isDead() -> deadSibs+=1
+                    gameBoard[entity.southSib.col][entity.northEastSib.row].isAlive() -> aliveSibs+=1
 
                     // south west sib ->
                 }
 
-            /*for(cell in row){
+            for(cell in row){
                 // north sib -> The top row will not have a north sib
                 if (gameBoard[cell.northSib.y][cell.northSib.x].isDead()) {deadSibs+=1}
                     else if (gameBoard[cell.northSib.x][cell.northSib.y].isAlive()) {aliveSibs+=1}
