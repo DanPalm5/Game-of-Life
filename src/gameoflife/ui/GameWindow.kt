@@ -56,7 +56,7 @@ class GameWindow(windowSize: Size<Int>, val gameInstance: Game) : JFrame()
         setLocationRelativeTo(null)
 
         /// This needs to be attached to a start/stop button. Its here for debugging for now
-        gameTicker.start()
+        //gameTicker.start()
     }
 
 }

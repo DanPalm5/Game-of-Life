@@ -7,17 +7,18 @@ import gameoflife.util.*
  * Game board is in row-major form (row, column)
  */
 class Game(
-    val boardSize: Size<Int>,
     // Initial states for each entity (dead or alive)
-    initStates: Array<Array<EntityState>> = Array(INIT_GRID_SIZE) { Array(INIT_GRID_SIZE) { EntityState.DEAD } })
+    initStates: Array<Array<EntityState>> = Array(1) { Array(1) { EntityState.DEAD } })
 {
 
+    val boardSize: Size<Int> = Size(initStates.getOrNull(0)?.size ?: 0, initStates.size)
+
     // initialize window and 2D array for game board
-    val gameBoard: Array<Array<Entity>> = Array(INIT_GRID_SIZE)
+    val gameBoard: Array<Array<Entity>> = Array(initStates.size)
     { row ->
-        Array(INIT_GRID_SIZE)
-        { cell ->
-            Entity(initStates[row][cell], GridPos(row, cell))
+        Array(initStates[row].size)
+        { column ->
+            Entity(initStates.getOrNull(row)?.getOrNull(column) ?: EntityState.DEAD, GridPos(row, column))
         }
     }
 
