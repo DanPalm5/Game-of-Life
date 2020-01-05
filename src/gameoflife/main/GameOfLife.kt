@@ -9,8 +9,9 @@ val WINDOW_SIZE = Size(800, 800)
 
 fun main()
 {
-    val game = Game(SaveData.readSaveFile("testsave.txt"))
-    val window = GameWindow(WINDOW_SIZE, game)
+//    Util.unpackResource("./resources/DefaultGameState.save")
+//    val game = Game(SaveData.readSaveData("./resources/DefaultGameState.save"))
+    val window = GameWindow(WINDOW_SIZE)
     window.isVisible = true
 }
 

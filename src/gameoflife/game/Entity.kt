@@ -23,7 +23,7 @@ enum class EntityState(val value: Int)
 class Entity(initState: EntityState = EntityState.DEAD, val position: GridPos<Int>)
 {
 
-    private var state: EntityState = initState
+    var state: EntityState = initState
     fun isAlive()   = state == EntityState.ALIVE
     fun isDead()    = state == EntityState.DEAD
     fun kill()      { state = EntityState.DEAD }

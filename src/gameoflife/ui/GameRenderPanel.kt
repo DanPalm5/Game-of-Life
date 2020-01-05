@@ -1,6 +1,7 @@
 package gameoflife.ui
 
 import gameoflife.game.Entity
+import gameoflife.game.EntityState
 import gameoflife.util.GridPos
 import gameoflife.util.Position
 import gameoflife.util.Size
@@ -98,7 +99,11 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
     /**
      * Functions for toggling entity states with user input
      */
+    // The last entity that was sampled, to prevent rapid state changes on mouse drag within the same cell
     private var lastSelection: Entity? = null
+    // The state of the entity that was initially clicked on. This is to allow "painting" with the mouse and not have
+    // entities modified in the same stroke be affected more than once
+    private var selectedState: EntityState? = null
     private fun handleMousePressed(e: MouseEvent?)
     {
         if(e != null)
@@ -106,6 +111,7 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
             val pos = Position(e.x, e.y)
             val gridPos = pixelsToGrid(pos)
             lastSelection = getEntity(gridPos)
+            selectedState = lastSelection?.state
             lastSelection?.toggleState()
 
             println("Mouse Press:")
@@ -118,6 +124,7 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
     private fun handleMouseReleased(e: MouseEvent?)
     {
         lastSelection = null
+        selectedState = null
 
         repaint()
     }
@@ -128,15 +135,15 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
         {
             val pos = Position(e.x, e.y)
             val gridPos = pixelsToGrid(pos)
-            val currEntity = getEntity(gridPos)
+            val entity = getEntity(gridPos)
 
-            if(currEntity != lastSelection)
+            if(entity != lastSelection && entity?.state == selectedState)
             {
-                lastSelection = currEntity
-                lastSelection?.toggleState()
+                lastSelection = entity
+                entity?.toggleState()
 
                 println("Mouse Drag:")
-                println("\tPixels -> $pos\n\tGrid -> $gridPos\n\tEntity -> $lastSelection")
+                println("\tPixels -> $pos\n\tGrid -> $gridPos\n\tEntity -> $entity")
             }
         }
 
