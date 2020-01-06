@@ -17,9 +17,9 @@ import javax.swing.JPanel
 class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
 {
 
-    private fun calcCellSize(): Size<Int>
+    fun updateCellSize()
     {
-        return Size(
+        cellSize = Size(
             size.width / parentWindow.gameInstance.boardSize.width,
             size.height / parentWindow.gameInstance.boardSize.height
         )
@@ -27,16 +27,17 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
 
 
     // Dimension of entity cell in pixels
-    private var cellSize: Size<Int> = calcCellSize()
+    private var cellSize: Size<Int> = Size(0,0)
 
     init
     {
         background = Color.BLACK
+        updateCellSize()
 
         // Update cell size function on window resize
         addComponentListener(object: ComponentAdapter()
         {
-            override fun componentResized(e: ComponentEvent?) { cellSize = calcCellSize() }
+            override fun componentResized(e: ComponentEvent?) { updateCellSize() }
         })
 
         // Mouse handler
@@ -114,8 +115,8 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
             selectedState = lastSelection?.state
             lastSelection?.toggleState()
 
-            println("Mouse Press:")
-            println("\tPixels -> $pos\n\tGrid -> $gridPos\n\tEntity -> $lastSelection")
+//            println("Mouse Press:")
+//            println("\tPixels -> $pos\n\tGrid -> $gridPos\n\tEntity -> $lastSelection")
         }
 
         repaint()
@@ -142,8 +143,8 @@ class GameRenderPanel(private val parentWindow: GameWindow) : JPanel()
                 lastSelection = entity
                 entity?.toggleState()
 
-                println("Mouse Drag:")
-                println("\tPixels -> $pos\n\tGrid -> $gridPos\n\tEntity -> $entity")
+//                println("Mouse Drag:")
+//                println("\tPixels -> $pos\n\tGrid -> $gridPos\n\tEntity -> $entity")
             }
         }
 

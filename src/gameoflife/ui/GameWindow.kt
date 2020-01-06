@@ -1,5 +1,6 @@
 package gameoflife.ui
 
+import gameoflife.game.EntityState
 import gameoflife.game.Game
 import gameoflife.util.SaveData
 import gameoflife.util.Size
@@ -33,8 +34,9 @@ class GameWindow(windowSize: Size<Int>) : JFrame()
 
     var gameInstance = Game(SaveData.readSaveData(DefaultSavePath))
     private val renderPanel: GameRenderPanel = GameRenderPanel(this)
-    private val delayField: JTextField = JTextField("1", 4)
     private val startStopButton: JButton = JButton("Start")
+    private val delayField: JTextField = JTextField("1", 4)
+    private val resizeButton: JButton = JButton("Resize Gameboard")
     private val saveButton: JButton = JButton("Save game state")
     private val loadButton: JButton = JButton("Load game state")
 
@@ -97,6 +99,15 @@ class GameWindow(windowSize: Size<Int>) : JFrame()
         ++gridwith
         add(delayField, c)
 
+        c.fill = GridBagConstraints.HORIZONTAL
+        c.weightx = 1.0
+        c.gridx = ++gridx
+        c.gridy = gridy
+        ++gridwith
+
+        resizeButton.addActionListener { resizeGameboard() }
+        add(resizeButton)
+
         // Save game button
         c.fill = GridBagConstraints.HORIZONTAL
         c.weightx = 1.0
@@ -152,6 +163,23 @@ class GameWindow(windowSize: Size<Int>) : JFrame()
             startStopButton.text = "Start"
             gameTicker.stop()
             gameRunning = false
+        }
+    }
+
+    private fun resizeGameboard()
+    {
+        val newSizeStr = JOptionPane.showInputDialog(this, "Input new size with format \'widthXheight\'")
+        if (newSizeStr.matches(Regex("\\d+[xX]\\d+")))
+        {
+            val sizeList = newSizeStr.toLowerCase().split("x")
+            val rows = sizeList[1].toIntOrNull()
+            val cols = sizeList[0].toIntOrNull()
+            if(rows == null || cols == null) return
+            val newBoard: Array<Array<EntityState>> = Array(rows) { Array(cols) { EntityState.DEAD } }
+            gameInstance = Game(newBoard)
+
+            renderPanel.updateCellSize()
+            renderPanel.repaint()
         }
     }
 
